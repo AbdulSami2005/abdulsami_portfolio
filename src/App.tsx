@@ -20,13 +20,17 @@ const terminalLinesData = [
 ];
 
 export default function App() {
-  const [isLight, setIsLight] = useState(false);
+  const [isLight, setIsLight] = useState(true);
   const [termLines, setTermLines] = useState<string[]>([]);
   const termBodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Theme setup
-    if (localStorage.getItem('theme') === 'light') {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      setIsLight(false);
+      document.documentElement.classList.remove('light');
+    } else {
       setIsLight(true);
       document.documentElement.classList.add('light');
     }
